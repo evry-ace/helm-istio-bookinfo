@@ -4,6 +4,7 @@ apiVersion: {{ .Values.gateway.tls.acme.certManager.version }}
 kind: Certificate
 metadata:
   name: bookinfo
+  namespace: {{ .Values.gateway.tls.gatewayNamespace }}
 spec:
   secretName: {{ .Values.gateway.tls.secretName }}
   renewBefore: {{ .Values.gateway.tls.acme.renewBefore }}

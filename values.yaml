@@ -11,6 +11,7 @@ gateway:
   tls:
     enabled: false
     secretName: bookinfo-tls
+    gatewayNamespace: istio-system
     acme:
       enabled: false
       certManager:
