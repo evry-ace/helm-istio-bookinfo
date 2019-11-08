@@ -2,8 +2,8 @@ name: AutoTag
 
 on:
   push:
-    #branches:
-    #  - master
+    branches:
+      - master
 
 jobs:
   test:
