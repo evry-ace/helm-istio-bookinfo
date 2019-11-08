@@ -1,0 +1,23 @@
+name: AutoTag
+
+on:
+  push:
+    #branches:
+    #  - master
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Git Tag
+      run: |
+        CHART_VERSION=$(cat Chart.yaml | grep version | awk '{ print $2 }')
+
+        git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+        git config --global user.name "${GITHUB_ACTOR}"
+
+        git tag -a "v${CHART_VERSION}" -m "v${CHART_VERSION}" || true
+        git push --tags "https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git"
