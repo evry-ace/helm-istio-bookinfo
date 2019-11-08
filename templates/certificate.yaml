@@ -1,0 +1,16 @@
+---
+{{- if and .Values.gateway.tls.enabled .Values.gateway.tls.acme.enabled }}
+apiVersion: {{ .Values.gateway.tls.acme.certManager.version }}
+kind: Certificate
+metadata:
+  name: bookinfo
+spec:
+  secretName: {{ .Values.gateway.tls.secretName }}
+  renewBefore: {{ .Values.gateway.tls.acme.renewBefore }}
+  commonName: {{ .Values.gateway.hostname }}
+  dnsNames:
+    - {{ .Values.gateway.hostname }}
+  issuerRef:
+    name: {{ .Values.gateway.tls.acme.issuerName }}
+    kind: {{ .Values.gateway.tls.acme.issuerKind }}
+{{- end }}

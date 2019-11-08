@@ -1,0 +1,28 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: bookinfo
+spec:
+  selector:
+    istio: {{ .Values.gateway.selector }}
+  servers:
+    - port:
+        number: 80
+        name: http
+        protocol: HTTP
+      hosts:
+        - {{ .Values.gateway.hostname }}
+      tls:
+        httpsRedirect: {{ .Values.gateway.httpsRedirect }}
+    {{- if .Values.gateway.tls.enabled }}
+    - port:
+        number: 443
+        name: https
+        protocol: HTTPS
+      hosts:
+        - {{ .Values.gateway.hostname }}
+      tls:
+        mode: SIMPLE
+        credentialName: {{ .Values.gateway.tls.secretName }}
+    {{- end }}

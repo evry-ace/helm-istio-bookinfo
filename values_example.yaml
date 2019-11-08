@@ -6,13 +6,13 @@ gateway:
   selector: ingressgateway
   hostname: example.com
 
-  httpsRedirect: false
+  httpsRedirect: true
 
   tls:
-    enabled: false
+    enabled: true
     secretName: bookinfo-tls
     acme:
-      enabled: false
+      enabled: true
       certManager:
         version: certmanager.k8s.io/v1alpha1
       renewBefore: 720h
